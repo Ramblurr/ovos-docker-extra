@@ -1,0 +1,3 @@
+ovos-stt-plugin-whispercpp
+ovos-stt-http-server
+git+https://github.com/abdeladim-s/pywhispercpp
