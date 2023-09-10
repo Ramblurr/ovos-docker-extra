@@ -27,6 +27,12 @@ jobs:
           - image: ghcr.io/ramblurr/ovos-stt-plugin-fasterwhisper
             dir: ovos-stt-plugin-fasterwhisper
             platforms: linux/amd64
+          - image: ghcr.io/ramblurr/neon-homeassistant-skill
+            dir: skill-homeassistant
+            platforms: linux/amd64
+          - image: ghcr.io/ramblurr/skill-ovos-fallback-chatgpt
+            dir: skill-ovos-fallback-chatgpt
+            platforms: linux/amd64
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -78,5 +84,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           platforms: ${{ matrix.platforms }}
           build-args: |
+            ALPHA=true
             BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
