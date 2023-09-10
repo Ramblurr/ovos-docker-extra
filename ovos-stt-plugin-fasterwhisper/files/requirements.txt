@@ -1,0 +1,2 @@
+ovos-stt-http-server
+git+https://github.com/OpenVoiceOS/ovos-stt-plugin-fasterwhisper.git@dev
