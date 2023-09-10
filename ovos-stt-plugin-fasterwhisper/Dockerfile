@@ -19,7 +19,7 @@ COPY files/requirements.txt /tmp/requirements.txt
 
 RUN set -e; \
   apt-get update; \
-  apt-get install -o Dpkg::Options::="--force-confold" -y git python3 python3-dev python3-pip curl build-essential swig portaudio19-dev libpulse-dev;\
+  apt-get install -o Dpkg::Options::="--force-confold" -y git python3 python3-dev python3-pip curl build-essential swig portaudio19-dev libpulse-dev; \
   if [ "${ALPHA}" == "true" ]; then \
   pip3 install --no-cache -r /tmp/requirements.txt --pre; \
   else \
@@ -27,8 +27,7 @@ RUN set -e; \
   fi; \
   apt-get --purge remove -y portaudio19-dev build-essential python3-dev portaudio19-dev libpulse-dev libasound2-dev; \
   apt-get --purge autoremove -y; \
-  apt-get clean; \
-  rm -rf ${HOME}/.cache /var/lib/apt /var/log/{apt,dpkg.log} /tmp/requirements.txt
+  rm -rf /root/cache /var/lib/apt/lists/* /var/log/{apt,dpkg.log} /tmp/requirements.txt
 
 
 ENTRYPOINT ["ovos-stt-server", "--engine", "ovos-stt-plugin-fasterwhisper"]
