@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
   build-and-push:
@@ -13,13 +14,18 @@ jobs:
       contents: read
       packages: write
     strategy:
+      fail-fast: false
+      max-parallel: 2
       matrix:
         include:
           - image: ghcr.io/ramblurr/hivemind-voice-sat
-            dockerfile: hivemind-voice-sat/Dockerfile
+            dir: hivemind-voice-sat
             platforms: linux/amd64,linux/arm64
           - image: ghcr.io/ramblurr/ovos-stt-plugin-whispercpp
-            dockerfile: ovos-stt-plugin-whispercpp/Dockerfile
+            dir: ovos-stt-plugin-whispercpp
+            platforms: linux/amd64
+          - image: ghcr.io/ramblurr/ovos-stt-plugin-fasterwhisper
+            dir: ovos-stt-plugin-fasterwhisper
             platforms: linux/amd64
     steps:
       - name: Checkout code
@@ -64,8 +70,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: .
-          file: ${{ matrix.dockerfile }}
+          context: "${{ matrix.dir }}"
+          file: "${{ matrix.dir }}/Dockerfile"
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: ${{ steps.meta.outputs.tags }}

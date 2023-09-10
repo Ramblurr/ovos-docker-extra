@@ -33,7 +33,7 @@ RUN set -e; \
   apt-get --purge remove -y portaudio19-dev build-essential python3-dev portaudio19-dev libpulse-dev libasound2-dev; \
   apt-get --purge autoremove -y; \
   apt-get clean; \
-  rm -rf ${HOME}/.cache /var/lib/apt /var/log/{apt,dpkg.log} /tmp/requirements.txt
+  rm -rf ${HOME}/.cache /var/log/{apt,dpkg.log} /tmp/requirements.txt
 
 
 USER ${USER}
