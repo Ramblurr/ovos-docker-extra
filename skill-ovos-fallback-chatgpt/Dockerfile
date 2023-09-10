@@ -21,4 +21,4 @@ RUN if [ "${ALPHA}" == "true" ]; then \
     fi \
     && rm -rf ${HOME}/.cache
 
-ENTRYPOINT ["ovos-skill-launcher", "skill-ovos-fallback-chatgpt"]
+ENTRYPOINT ["ovos-skill-launcher", "skill-ovos-fallback-chatgpt.openvoiceos"]
