@@ -1,0 +1,30 @@
+{
+  "app": "skill-homeassistant",
+  "base": false,
+  "channels": [
+    {
+    "name": "stable",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "stable": true,
+    "tests": {
+      "enabled": false,
+      "type": "cli"
+    }
+  },
+    {
+      "name": "dev",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "stable": false,
+      "tests": {
+        "enabled": false,
+        "type": "cli"
+      }
+    }
+  ]
+}
