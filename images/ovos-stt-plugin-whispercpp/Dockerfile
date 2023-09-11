@@ -3,6 +3,7 @@ FROM docker.io/smartgic/ovos-sound-base:${TAG}
 
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
+ARG CHANNEL=unknown
 
 LABEL org.opencontainers.image.title="Open Voice OS OCI WhisperCPP STT engine"
 LABEL org.opencontainers.image.description=""
@@ -12,7 +13,6 @@ LABEL org.opencontainers.image.documentation="https://openvoiceos.github.io/comm
 LABEL org.opencontainers.image.source="https://github.com/OpenVoiceOS/ovos-docker"
 LABEL org.opencontainers.image.vendor="Open Voice OS"
 
-ARG ALPHA=false
 ARG USER=ovos
 
 SHELL ["/bin/bash", "-c"]
@@ -24,7 +24,7 @@ COPY ./images/ovos-stt-plugin-whispercpp/files/requirements.txt /tmp/requirement
 RUN set -e; \
   apt-get update; \
   apt-get install -o Dpkg::Options::="--force-confold" -y swig procps ddcutil libatomic1 portaudio19-dev libpulse-dev build-essential python3-dev libasound2-dev; \
-  if [ "${ALPHA}" == "true" ]; then \
+  if [ "${CHANNEL}" == "dev" ]; then \
   pip3 install --no-cache -r /tmp/requirements.txt --pre; \
   else \
   pip3 install --no-cache -r /tmp/requirements.txt; \

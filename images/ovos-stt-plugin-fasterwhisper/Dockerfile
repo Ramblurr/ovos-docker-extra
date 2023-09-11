@@ -1,6 +1,7 @@
 FROM docker.io/library/debian:bullseye-slim
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
+ARG CHANNEL=unknown
 
 LABEL org.opencontainers.image.title="Open Voice OS OCI Fasterwhisper"
 LABEL org.opencontainers.image.description=""
@@ -10,7 +11,6 @@ LABEL org.opencontainers.image.documentation="https://openvoiceos.github.io/comm
 LABEL org.opencontainers.image.source="https://github.com/OpenVoiceOS/ovos-docker"
 LABEL org.opencontainers.image.vendor="Open Voice OS"
 
-ARG ALPHA=false
 SHELL ["/bin/bash", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -20,7 +20,7 @@ COPY ./images/ovos-stt-plugin-fasterwhisper/files/requirements.txt /tmp/requirem
 RUN set -e; \
   apt-get update; \
   apt-get install -o Dpkg::Options::="--force-confold" -y git python3 python3-dev python3-pip curl build-essential swig portaudio19-dev libpulse-dev; \
-  if [ "${ALPHA}" == "true" ]; then \
+  if [ "${CHANNEL}" == "dev" ]; then \
   pip3 install --no-cache -r /tmp/requirements.txt --pre; \
   else \
   pip3 install --no-cache -r /tmp/requirements.txt; \

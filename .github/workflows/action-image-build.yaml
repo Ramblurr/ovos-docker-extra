@@ -120,9 +120,12 @@ jobs:
               image_name="ghcr.io/$repo_owner/${{ matrix.image.chan_tag_testing }}"
               outputs="type=docker,name=${image_name},push=false"
           fi
+          build_date=$(date +%Y%m%d%H%M)
           echo "image_name=${image_name}" >> $GITHUB_OUTPUT
           echo "outputs=${outputs}" >> $GITHUB_OUTPUT
-          echo "repo_owner=${repo_owner}" >>${GITHUB_ENV}
+          echo "build_date=${build_date}" >> "$GITHUB_OUTPUT"
+          echo "repo_owner=${repo_owner}" >> ${GITHUB_ENV}
+
         env:
           OWNER: "${{ github.repository_owner }}"
 
@@ -133,6 +136,7 @@ jobs:
           build-args: |-
             VERSION=${{ matrix.image.chan_upstream_version }}
             CHANNEL=${{ matrix.image.channel }}
+            BUILD_DATE=${{ steps.prepare-build-outputs.outputs.build_date }}
           context: .
           platforms: ${{ matrix.image.platform }}
           file: ${{ matrix.image.chan_dockerfile }}

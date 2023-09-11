@@ -3,6 +3,7 @@ FROM smartgic/ovos-skill-base:${TAG}
 
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
+ARG CHANNEL=unknown
 
 LABEL org.opencontainers.image.title="Open Voice OS OCI standalone OCP"
 LABEL org.opencontainers.image.description="OVOS Common Play is a full-fledged voice media player packaged as a ovos audio plugin."
@@ -12,10 +13,9 @@ LABEL org.opencontainers.image.documentation="https://openvoiceos.github.io/comm
 LABEL org.opencontainers.image.source="https://github.com/OpenVoiceOS/ovos-docker"
 LABEL org.opencontainers.image.vendor="Open Voice OS"
 
-ARG ALPHA=false
-
 COPY ./images/ovos-ocp-standalone/files/requirements.txt /tmp/requirements.txt
-RUN if [ "${ALPHA}" == "true" ]; then \
+
+RUN if [ "${CHANNEL}" == "dev" ]; then \
       pip3 install --no-cache -r /tmp/requirements.txt --pre; \
     else \
       pip3 install --no-cache -r /tmp/requirements.txt; \

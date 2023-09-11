@@ -3,6 +3,7 @@ FROM docker.io/smartgic/ovos-sound-base:${TAG}
 
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
+ARG CHANNEL=unknown
 
 LABEL org.opencontainers.image.title="Open Voice OS OCI HiveMind Voice Satellite"
 LABEL org.opencontainers.image.description="OpenVoiceOS Satellite, connect to HiveMind"
@@ -12,7 +13,6 @@ LABEL org.opencontainers.image.documentation="https://openvoiceos.github.io/comm
 LABEL org.opencontainers.image.source="https://github.com/OpenVoiceOS/ovos-docker"
 LABEL org.opencontainers.image.vendor="Open Voice OS"
 
-ARG ALPHA=false
 ARG USER=ovos
 
 SHELL ["/bin/bash", "-c"]
@@ -30,7 +30,7 @@ RUN set -e; \
   apt-get install -o Dpkg::Options::="--force-confold" -y procps ddcutil pipewire pipewire-alsa libatomic1 portaudio19-dev libpulse-dev build-essential python3-dev libasound2-dev mimic vlc; \
   mkdir -p ${HOME}/.config/hivemind ${HOME}/.local/share/hivemind; \
   pip3 install -f 'https://whl.smartgic.io/' tflite_runtime; \
-  if [ "${ALPHA}" == "true" ]; then \
+  if [ "${CHANNEL}" == "dev" ]; then \
   pip3 install -r /tmp/requirements.txt --pre; \
   else \
   pip3 install -r /tmp/requirements.txt; \
