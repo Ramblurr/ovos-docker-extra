@@ -20,7 +20,7 @@ SHELL ["/bin/bash", "-c"]
 USER root
 
 ENV DEBIAN_FRONTEND noninteractive
-COPY files/requirements.txt /tmp/requirements.txt
+COPY ./images/ovos-stt-plugin-whispercpp/files/requirements.txt /tmp/requirements.txt
 RUN set -e; \
   apt-get update; \
   apt-get install -o Dpkg::Options::="--force-confold" -y swig procps ddcutil libatomic1 portaudio19-dev libpulse-dev build-essential python3-dev libasound2-dev; \
