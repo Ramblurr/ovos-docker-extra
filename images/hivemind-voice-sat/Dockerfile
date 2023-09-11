@@ -21,7 +21,7 @@ USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY files/requirements.txt /tmp/requirements.txt
+COPY ./images/hivemind-voice-sat/files/requirements.txt /tmp/requirements.txt
 
 RUN set -e; \
   curl -sS https://forslund.github.io/mycroft-desktop-repo/mycroft-desktop.gpg.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/mimic.gpg; \
@@ -45,6 +45,6 @@ RUN set -e; \
 USER ${USER}
 
 ENV EDITOR=vim
-COPY --chmod=0755 files/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chmod=0755 ./images/hivemind-voice-sat/files/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/usr/local/bin/entrypoint.sh"]
 WORKDIR /home/${USER}
