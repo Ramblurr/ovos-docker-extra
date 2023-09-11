@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-c"]
 
 ENV DEBIAN_FRONTEND noninteractive
 
-COPY files/requirements.txt /tmp/requirements.txt
+COPY ./images/ovos-stt-plugin-fasterwhisper/files/requirements.txt /tmp/requirements.txt
 
 RUN set -e; \
   apt-get update; \
