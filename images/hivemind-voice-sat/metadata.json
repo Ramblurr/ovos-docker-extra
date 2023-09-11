@@ -1,0 +1,18 @@
+{
+  "app": "hivemind-voice-sat",
+  "base": false,
+  "channels": [
+    {
+      "name": "dev",
+      "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+      ],
+      "stable": false,
+      "tests": {
+        "enabled": false,
+        "type": "cli"
+      }
+    }
+  ]
+}
