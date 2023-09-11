@@ -1,5 +1,7 @@
 ---
 name: "Manual Release"
+permissions:
+  packages: write
 
 concurrency:
   group: container-release

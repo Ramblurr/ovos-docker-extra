@@ -1,6 +1,7 @@
 ---
 name: "Scheduled Release"
-
+permissions:
+  packages: write
 concurrency:
   group: container-release
   cancel-in-progress: false

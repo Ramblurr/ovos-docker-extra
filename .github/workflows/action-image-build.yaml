@@ -1,5 +1,7 @@
 ---
 name: "Action: Image Build"
+permissions:
+  packages: write
 
 on:
   workflow_call:

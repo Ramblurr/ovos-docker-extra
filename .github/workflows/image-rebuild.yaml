@@ -1,6 +1,7 @@
 ---
 name: "Image: Rebuild"
-
+permissions:
+  packages: write
 on:
   push:
     branches:
