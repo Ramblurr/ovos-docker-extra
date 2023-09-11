@@ -59,7 +59,7 @@ elif pw-link --links &> /dev/null; then
     echo -e 'pcm.!default pipewire\nctl.!default pipewire' > ~/.asoundrc
 fi
 
-sed -i 's/disable_ocp=True/disable_ocp=False/' /home/ovos/.venv/lib/python3.11/site-packages/hivemind_voice_satellite/__main__.py
+# sed -i 's/disable_ocp=True/disable_ocp=False/' /home/ovos/.venv/lib/python3.11/site-packages/hivemind_voice_satellite/__main__.py
 
 hivemind-voice-sat --host "$HIVEMIND_CORE_HOST" \
     --key "$HIVEMIND_SAT_KEY" \
