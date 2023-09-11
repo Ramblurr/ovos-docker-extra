@@ -109,16 +109,20 @@ jobs:
       - name: Prepare Build Outputs
         id: prepare-build-outputs
         run: |
+          # downcase repo owner
+          repo_owner=${OWNER,,}
           if [[ ${{ inputs.pushImages }} == 'true' ]]; then
-              image_name="ghcr.io/${{ github.repository_owner }}/${{ matrix.image.chan_image_name }}"
+              image_name="ghcr.io/$repo_owner/${{ matrix.image.chan_image_name }}"
               outputs="type=image,name=${image_name},push-by-digest=true,name-canonical=true,push=true"
           else
-              image_name="ghcr.io/${{ github.repository_owner }}/${{ matrix.image.chan_tag_testing }}"
+              image_name="ghcr.io/$repo_owner/${{ matrix.image.chan_tag_testing }}"
               outputs="type=docker,name=${image_name},push=false"
           fi
-          # downcase image_name
-          echo "image_name=${image_name,,}" >> $GITHUB_OUTPUT
+          echo "image_name=${image_name}" >> $GITHUB_OUTPUT
           echo "outputs=${outputs}" >> $GITHUB_OUTPUT
+          echo "repo_owner=${repo_owner}" >>${GITHUB_ENV}
+        env:
+          OWNER: "${{ github.repository_owner }}"
 
       - name: Build Image
         uses: docker/build-push-action@v4
@@ -151,7 +155,7 @@ jobs:
           else
               image_name="${{ steps.prepare-build-outputs.outputs.image_name }}"
           fi
-          dgoss run ${image_name} ${{ matrix.image.chan_goss_args }}
+          dgoss run ${image_name,,} ${{ matrix.image.chan_goss_args }}
 
       - name: Export Digest
         id: export-digest
@@ -222,6 +226,13 @@ jobs:
           ls -la
           cat *
 
+      - name: downcase repository_owner
+        id: repo-owner
+        run: |
+          echo "repo_owner=${OWNER,,}" >> ${GITHUB_OUTPUT}
+        env:
+          OWNER: "${{ github.repository_owner }}"
+
       # https://docs.docker.com/build/ci/github-actions/multi-platform/#distribute-build-across-multiple-runners
       - name: Merge Manifests
         id: merge
@@ -229,12 +240,12 @@ jobs:
         env:
           TAGS: ${{ toJSON(matrix.manifest.tags) }}
         run: |
-          docker buildx imagetools create $(jq -cr '. | map("-t ghcr.io/${{ github.repository_owner }}/" + .) | join(" ")'  <<< "$TAGS") \
-              $(printf 'ghcr.io/${{ github.repository_owner }}/${{ matrix.manifest.image }}@sha256:%s ' *)
+          docker buildx imagetools create $(jq -cr '. | map("-t ghcr.io/${{ steps.repo-owner.outputs.repo_owner }}/" + .) | join(" ")'  <<< "$TAGS") \
+              $(printf 'ghcr.io/${{ steps.repo-owner.outputs.repo_owner }}/${{ matrix.manifest.image }}@sha256:%s ' *)
 
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ghcr.io/${{ github.repository_owner }}/${{ matrix.manifest.image }}:${{ matrix.manifest.version }}
+          docker buildx imagetools inspect ghcr.io/${{ steps.repo-owner.outputs.repo_owner }}/${{ matrix.manifest.image }}:${{ matrix.manifest.version }}
 
       - name: Build successful
         id: build-success
