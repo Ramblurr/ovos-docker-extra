@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-from ovos_plugin_common_play.ocp import OCP
+from ovos_bus_client import MessageBusClient
+from ovos_plugin_common_play.ocp import OCP, OCP_ID
 from ovos_utils import wait_for_exit_signal
-from ovos_utils.log import init_service_logger, LOG
 
 
 def main():
+    bus = MessageBusClient()
+    bus.run_in_thread()
+    bus.connected_event.wait()
+    config = {"mode": "external"}
+
     try:
-        ocp = OCP()
-        ocp.start()
+        ocp = OCP(bus=bus, skill_id=OCP_ID, settings=config)
     except ImportError:
         print("OCP is not available")
         ocp = None
