@@ -32,4 +32,3 @@ ovos-plugin-manager
 poorman-handshake
 HiveMind-voice-sat
 hivemind_bus_client
-jarbas_utils
