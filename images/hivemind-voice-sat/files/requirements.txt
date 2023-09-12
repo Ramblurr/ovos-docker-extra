@@ -3,14 +3,11 @@ onnxruntime
 ovos-dinkum-listener
 ovos-microphone-plugin-sounddevice
 ovos-stt-plugin-server
-ovos-stt-plugin-vosk
 ovos-vad-plugin-precise
 ovos-vad-plugin-silero
 ovos-vad-plugin-webrtcvad
-ovos-ww-plugin-pocketsphinx
 ovos-ww-plugin-precise-lite
-ovos-ww-plugin-vosk
-vosk
+ovos-vad-plugin-silero
 
 
 # audio
@@ -32,5 +29,7 @@ ovos-PHAL-plugin-ipgeo
 ovos-plugin-manager
 
 # hivemind
-git+https://github.com/JarbasHiveMind/HiveMind-voice-sat.git@dev
-git+https://github.com/JarbasHiveMind/HiveMind-core.git@dev
+poorman-handshake
+HiveMind-voice-sat
+hivemind_bus_client
+jarbas_utils
