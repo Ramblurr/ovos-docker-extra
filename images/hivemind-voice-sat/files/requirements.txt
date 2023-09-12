@@ -8,6 +8,10 @@ ovos-vad-plugin-silero
 ovos-vad-plugin-webrtcvad
 ovos-ww-plugin-precise-lite
 ovos-vad-plugin-silero
+ovos-ww-plugin-openwakeword
+ovos-ww-plugin-pocketsphinx
+ovos-ww-plugin-vosk
+vosk
 
 
 # audio
