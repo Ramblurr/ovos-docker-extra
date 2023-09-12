@@ -1,1 +1,1 @@
-ovos-plugin-common-play
+git+https://github.com/Ramblurr/ovos-ocp-audio-plugin.git@feat/launcher

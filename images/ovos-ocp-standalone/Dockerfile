@@ -14,11 +14,12 @@ LABEL org.opencontainers.image.source="https://github.com/OpenVoiceOS/ovos-docke
 LABEL org.opencontainers.image.vendor="Open Voice OS"
 
 COPY ./images/ovos-ocp-standalone/files/requirements.txt /tmp/requirements.txt
+COPY ./images/ovos-ocp-standalone/files/requirements.stable.txt /tmp/requirements.stable.txt
 
 RUN if [ "${CHANNEL}" == "dev" ]; then \
       pip3 install --no-cache -r /tmp/requirements.txt --pre; \
     else \
-      pip3 install --no-cache -r /tmp/requirements.txt; \
+      pip3 install --no-cache -r /tmp/requirements.stable.txt; \
     fi \
     && rm -rf ${HOME}/.cache
 
