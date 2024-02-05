@@ -16,8 +16,6 @@ Refer to [OpenVoiceOS/ovos-docker](https://github.com/OpenVoiceOS/ovos-docker/) 
 | `ghcr.io/ramblurr/ovos-ocp-standalone-dev`           |
 | `ghcr.io/ramblurr/ovos-stt-plugin-fasterwhisper`     |
 | `ghcr.io/ramblurr/ovos-stt-plugin-fasterwhisper-dev` |
-| `ghcr.io/ramblurr/ovos-stt-plugin-whispercpp`        |
-| `ghcr.io/ramblurr/ovos-stt-plugin-whispercpp-dev`    |
 | `ghcr.io/ramblurr/skill-ovos-fallback-chatgpt`       |
 | `ghcr.io/ramblurr/skill-ovos-fallback-chatgpt-dev`   |
 
