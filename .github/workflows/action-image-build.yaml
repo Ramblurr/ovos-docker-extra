@@ -130,7 +130,7 @@ jobs:
           OWNER: "${{ github.repository_owner }}"
 
       - name: Build Image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         id: build
         with:
           build-args: |-
